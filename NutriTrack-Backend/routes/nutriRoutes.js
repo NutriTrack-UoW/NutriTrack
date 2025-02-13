@@ -1,6 +1,7 @@
 import express from "express";
 import verifyToken from '../verifyToken.js';
 import {registeration} from "../controllers/nutriControllers.js";
+import {updateUserProfile} from "../controllers/nutriControllers.js";
 import {login} from "../controllers/nutriControllers.js";
 import {getallFoodItems } from "../controllers/nutriControllers.js";
 import { getFoodItembyName } from "../controllers/nutriControllers.js";
@@ -19,6 +20,9 @@ router.get("/foods",verifyToken,getallFoodItems)
 
 //endpoint to search food by name through URL
 router.get("/foods/:name",verifyToken,getFoodItembyName)
+
+// Update user profile route
+router.put('/profile', verifyToken, updateUserProfile);
 
 // endpoint to track a food 
 router.post("/track",verifyToken,trackfoodItem)

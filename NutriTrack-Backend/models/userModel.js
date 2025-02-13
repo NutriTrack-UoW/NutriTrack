@@ -18,8 +18,21 @@ const userSchema= mongoose.Schema({
         type:Number,
         required:true,
         min:15
+    },
+    height:{
+        type:Number,
+        required:true
+    },
+    weight:{
+        type:Number,
+        required:true
+    },
+    activityLevel:{
+        type:String,
+        required:true
     }
+
 },{timestamps:true})
 
 const userModel = mongoose.model("users",userSchema);
-export default userModel ;
+export default userModel;
