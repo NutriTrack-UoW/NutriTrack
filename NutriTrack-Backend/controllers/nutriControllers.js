@@ -52,7 +52,9 @@ export const login = async(req,res)=>{
             bcrypt.compare(userCred.password,user.password,(err,success)=>{
                 if (success==true)
                 {
-                    jwt.sign({email:userCred.email},"nutritrackapp",(err,token)=>{ //token consists of 3 things - header, secret key, payload 
+                    //jwt.sign({email:userCred.email},"nutritrackapp",(err,token)=>{ //token consists of 3 things - header, secret key, payload 
+                    jwt.sign({ email: userCred.email, id: user._id }, "nutritrackapp", (err, token) => { 
+
                         if(!err){
                             res.send({message:"Login Success", token:token,userid:user._id,name:user.name})
                         }
@@ -130,7 +132,7 @@ export const updateUserProfile = async (req, res) => {
       const { height, weight, age, activityLevel } = req.body;
       const userId = req.user.id;
   
-      const user = await User.findByIdAndUpdate(userId, { height, weight, age, activityLevel }, { new: true });
+      const user = await userModel.findByIdAndUpdate(userId, { height, weight, age, activityLevel }, { new: true });
   
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
@@ -141,3 +143,85 @@ export const updateUserProfile = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   }
+
+// export const profileSetup = async (req, res) => {
+//     const { height, weight, age, activityLevel } = req.body;
+//     console.log('Received data:', { height, weight, age, activityLevel });
+//     //console.log('User ID:', req.user.id);
+//     try {
+//       const user = await userModel.findByIdAndUpdate(req.user.id, { height, weight, age, activityLevel, profileCompleted: true }, { new: true });
+//       res.send({ success: true, message: "Profile setup successful", data: user });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).send({ success: false, message: "Error occurred during profile setup" });
+//     }
+//   }
+
+export const profileSetup = async (req, res) => {
+    const { height, weight, age, activityLevel } = req.body;
+    console.log('Received data:', { height, weight, age, activityLevel });
+  
+    // Manually parse the token and set req.user if not already set
+    if (!req.user) {
+      const token = req.headers.authorization?.split(' ')[1];
+      if (token) {
+        try {
+          const decoded = jwt.verify(token, "nutritrackapp");
+          req.user = decoded;
+        } catch (error) {
+          return res.status(400).send({ success: false, message: 'Invalid token.' });
+        }
+      } else {
+        return res.status(401).send({ success: false, message: 'Access denied. No token provided.' });
+      }
+    }
+  
+    console.log('User ID:', req.user.id);
+    try {
+      const user = await userModel.findByIdAndUpdate(req.user.id, { height, weight, age, profileCompleted: true }, { new: true });
+      res.send({ success: true, message: "Profile setup successful", data: user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ success: false, message: "Error occurred during profile setup" });
+    }
+  };
+  
+  
+//   export const getProfile = async (req, res) => {
+//     try {
+//       const user = await userModel.findById(req.user.id);
+//       res.send(user);
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).send({ success: false, message: "Error occurred while fetching profile" });
+//     }
+//   }
+
+export const getProfile = async (req, res) => {
+    // Manually parse the token and set req.user if not already set
+    if (!req.user) {
+      const token = req.headers.authorization?.split(' ')[1];
+      if (token) {
+        try {
+          const decoded = jwt.verify(token, "nutritrackapp");
+          req.user = decoded;
+        } catch (error) {
+          return res.status(400).send({ success: false, message: 'Invalid token.' });
+        }
+      } else {
+        return res.status(401).send({ success: false, message: 'Access denied. No token provided.' });
+      }
+    }
+  
+    console.log('User ID:', req.user.id);
+    try {
+      const user = await userModel.findById(req.user.id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };

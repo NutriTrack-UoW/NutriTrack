@@ -9,7 +9,7 @@ import nutriRoutes from './routes/nutriRoutes.js';
 dotenv.config();
 
 console.log(process.env.MONGO_URI);
-const PORT = process.env.PORT || 8001
+const PORT = process.env.PORT || 7000
 
 const app = express();
 

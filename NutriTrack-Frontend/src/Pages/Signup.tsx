@@ -2,15 +2,19 @@ import axios from 'axios';
 import { Container, VStack, Button, Input, Text } from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
+    console.log("Signup button clicked");
     try {
-      const response = await axios.post('http://localhost:5000/register', { email, password });
+      const response = await axios.post('http://localhost:7000/register', { email, password });
       console.log("Signup successful", response.data);
+      navigate("/login");
     } catch (error) {
       console.error("Error during signup", error);
     }

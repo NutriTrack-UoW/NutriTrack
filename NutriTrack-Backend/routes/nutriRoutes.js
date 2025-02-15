@@ -6,6 +6,9 @@ import {login} from "../controllers/nutriControllers.js";
 import {getallFoodItems } from "../controllers/nutriControllers.js";
 import { getFoodItembyName } from "../controllers/nutriControllers.js";
 import { trackfoodItem } from "../controllers/nutriControllers.js";
+import {getProfile} from "../controllers/nutriControllers.js";
+import {profileSetup} from "../controllers/nutriControllers.js";
+
 const router = express.Router();
 
 
@@ -22,7 +25,8 @@ router.get("/foods",verifyToken,getallFoodItems)
 router.get("/foods/:name",verifyToken,getFoodItembyName)
 
 // Update user profile route
-router.put('/profile', verifyToken, updateUserProfile);
+router.put("/profile-setup",verifyToken, profileSetup);
+router.get("/profile", verifyToken, getProfile);
 
 // endpoint to track a food 
 router.post("/track",verifyToken,trackfoodItem)

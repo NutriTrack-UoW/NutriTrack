@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const userSchema= mongoose.Schema({
     name:{
         type:String,
-        required:true
+        required:false
     },
     email:{
         type:String,
@@ -16,21 +16,25 @@ const userSchema= mongoose.Schema({
     },
     age:{
         type:Number,
-        required:true,
+        required:false,
         min:15
     },
     height:{
         type:Number,
-        required:true
+        default: null
     },
     weight:{
         type:Number,
-        required:true
+        default: null
     },
     activityLevel:{
         type:String,
-        required:true
-    }
+        default: null
+    },
+    profileCompleted: {
+        type: Boolean,
+        default: false
+      }
 
 },{timestamps:true})
 

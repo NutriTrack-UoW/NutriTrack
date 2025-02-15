@@ -2,15 +2,30 @@ import axios from 'axios';
 import { Container, VStack, Button, Input, Text } from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+interface LoginResponse {
+  token: string;
+  profileCompleted: boolean;
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/login', { email, password });
+      const response = await axios.post<LoginResponse>('http://localhost:7000/login', { email, password });
       console.log("Login successful", response.data);
+      localStorage.setItem('token', response.data.token);
+      if (response.data.profileCompleted) {
+        navigate("/dashboard");
+      } else {
+        navigate("/profile-setup");
+      }
+
     } catch (error) {
       console.error("Error during login", error);
     }
