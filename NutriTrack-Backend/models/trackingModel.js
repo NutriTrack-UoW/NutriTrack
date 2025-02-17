@@ -13,13 +13,13 @@ const trackingSchema = mongoose.Schema({
         required:true
     },
     details:{
-       
+
         calories:Number,
         protein:Number,
         carbohydrates:Number,
         fat:Number,
         fiber:Number,
-       
+        
     },
     eatenDate:{
         type:String,
