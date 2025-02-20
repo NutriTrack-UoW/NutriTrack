@@ -55,16 +55,8 @@
 import React, { useState, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Container, VStack, Input, Button, Heading } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Heading, Select } from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-
-
-// const ProfileSetup = () => {
-//   const [height, setHeight] = useState('');
-//   const [weight, setWeight] = useState('');
-//   const [age, setAge] = useState('');
-//   const [activityLevel, setActivityLevel] = useState('');
-//   const navigate = useNavigate();
 
 const ProfileSetup: React.FC = () => {
   const [height, setHeight] = useState<number | string>('');
@@ -75,21 +67,10 @@ const ProfileSetup: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-  //   try {
-  //     const token = localStorage.getItem('token');
-  //     const data = { height, weight, age};
-  //     console.log('Sending data:', data);
-  //     await axios.put('http://localhost:7000/profile-setup', { height, weight, age,}, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     });
-  //     navigate('/dashboard');
-  //   } catch (error) {
-  //     console.error('Error updating profile', error);
-  //   }
-  // };
+
       try {
       const token = localStorage.getItem('token');
-      const data = { height, weight, age};
+      const data = { height, weight, age, activityLevel };
       console.log('Sending data:', data);
       await axios.put('http://localhost:7000/profile-setup', data, {
         headers: { Authorization: `Bearer ${token}` }
@@ -106,21 +87,30 @@ const ProfileSetup: React.FC = () => {
         <Heading>Profile Setup</Heading>
         <form onSubmit={handleSubmit}>
           <FormControl id="height" isRequired>
-            <FormLabel>Height</FormLabel>
+            <FormLabel>Height (cm)</FormLabel>
             <Input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} />
           </FormControl>
           <FormControl id="weight" isRequired>
-            <FormLabel>Weight</FormLabel>
+            <FormLabel>Weight (kg)</FormLabel>
             <Input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} />
           </FormControl>
           <FormControl id="age" isRequired>
-            <FormLabel>Age</FormLabel>
+            <FormLabel>Age (years)</FormLabel>
             <Input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
           </FormControl>
           <FormControl id="activityLevel" isRequired>
             <FormLabel>Activity Level</FormLabel>
             <Input type="text" value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)} />
           </FormControl>
+          {/* <FormControl id="activityLevel" isRequired>
+            <FormLabel>Activity Level</FormLabel>
+            <Select value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)}>
+              <option value="light">Light</option>
+              <option value="moderate">Moderate</option>
+              <option value="active">Active</option>
+              <option value="very active">Very Active</option>
+            </Select>
+          </FormControl> */}
           <Button type="submit" colorScheme="teal" size="lg" mt={4}>
             Save
           </Button>
