@@ -70,7 +70,7 @@ const ProfileSetup: React.FC = () => {
   const [height, setHeight] = useState<number | string>('');
   const [weight, setWeight] = useState<number | string>('');
   const [age, setAge] = useState<number | string>('');
-  //const [activityLevel, setActivityLevel] = useState<string>('');
+  const [activityLevel, setActivityLevel] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -117,10 +117,10 @@ const ProfileSetup: React.FC = () => {
             <FormLabel>Age</FormLabel>
             <Input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
           </FormControl>
-          {/* <FormControl id="activityLevel" isRequired>
+          <FormControl id="activityLevel" isRequired>
             <FormLabel>Activity Level</FormLabel>
             <Input type="text" value={activityLevel} onChange={(e) => setActivityLevel(e.target.value)} />
-          </FormControl> */}
+          </FormControl>
           <Button type="submit" colorScheme="teal" size="lg" mt={4}>
             Save
           </Button>
