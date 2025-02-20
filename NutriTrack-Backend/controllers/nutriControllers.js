@@ -56,9 +56,9 @@ export const login = async(req,res)=>{
                     jwt.sign({ email: userCred.email, id: user._id }, "nutritrackapp", (err, token) => { 
 
                         if(!err){
-                            res.send({message:"Login Success", token:token,userid:user._id,name:user.name})
+                            res.send({message:"Login Success", token:token, userid:user._id, name:user.name, profileCompleted: user.profileCompleted});
                         }
-                    })
+                    });
                 }
                 else{
                     res.status(403).send({message:"Invalid credentials"})
