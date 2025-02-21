@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import nutriRoutes from './routes/nutriRoutes.js';
 import authRoutes from "./routes/authRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/",nutriRoutes)
+app.use("/api/user",profileRoutes)
 
 app.listen(PORT,()=>{
     connectDB();
