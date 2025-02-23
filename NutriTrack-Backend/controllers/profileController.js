@@ -127,6 +127,8 @@ export const profileSetup = async (req, res) => {
       }
   
       await userProfile.save();
+      await User.findByIdAndUpdate(user, { profileCompleted: true });
+
   
       res.status(200).json({
         success: true,

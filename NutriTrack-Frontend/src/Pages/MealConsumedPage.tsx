@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {  Box, Container, Heading, Text, Spinner, VStack,SimpleGrid} from '@chakra-ui/react';
 import { Stat,StatLabel, StatNumber,StatHelpText,} from "@chakra-ui/stat"
 interface FoodDetails {
@@ -116,10 +117,10 @@ const MealsConsumedPage = () => {
             </Heading>
             {/* Custom Divider using Box */}
             <Box width="100%" height="1px" bg="gray.300" my={4} />
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
               {categorizedMeals[mealTime as keyof typeof categorizedMeals].map((meal, index) => (
                 <Box key={index} p={5} shadow="md" borderWidth="1px" borderRadius="md">
-                  <VStack align="start" spacing={3}>
+                  <VStack align="start" gap={3}>
                     <Heading size="md">{meal.foodName.charAt(0).toUpperCase() + meal.foodName.slice(1)}</Heading>
                     <Text fontWeight="bold">Calories: {meal.details.calories}</Text>
                     <Text>Protein: {meal.details.protein}g</Text>
@@ -137,7 +138,7 @@ const MealsConsumedPage = () => {
       <Box mt={8}>
   <Heading size="lg" mb={4}>Total Nutrients</Heading>
 
-  <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
+  <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
     {/* Total Calories */}
     <Stat p={4} boxShadow="md" borderRadius="md">
       <StatLabel>Total Calories</StatLabel>
