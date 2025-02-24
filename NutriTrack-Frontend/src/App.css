@@ -184,6 +184,9 @@
   --dark-green: #122215; /* Background color */
   --bright-green: #54dd48; /* Text and button highlight color */
   --off-white: #f1ede4; /* Log In text color */
+  --medium-green: #3a6b35; /* Medium green background color */
+  --light-green: #d4f1c5; /* Light green background color */
+  --dark-gray: #2C3E50; /* Dark gray text color */
 }
 
 /* Backgrounds */

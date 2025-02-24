@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from "../models/user.js";
-import UserProfile from "../models/UserProfile.js";
+import UserProfile from "../models/userProfile.js";
 import dotenv from "dotenv";
  
 dotenv.config();
@@ -114,6 +114,7 @@ export const profileSetup = async (req, res) => {
         userProfile.activityLevel = activityLevel;
         userProfile.height = height;
         userProfile.weight = weight;
+        userProfile.profileCompleted = true;
       } else {
         userProfile = new UserProfile({
           user: req.user.id,
@@ -123,6 +124,7 @@ export const profileSetup = async (req, res) => {
           activityLevel,
           height,
           weight,
+          profileCompleted: true,
         });
       }
   

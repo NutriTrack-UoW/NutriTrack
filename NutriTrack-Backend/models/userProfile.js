@@ -21,7 +21,10 @@ const UserProfileSchema = new mongoose.Schema({
   activityLevel: { type: String },
   height: { type: Number },
   weight: { type: Number },
+  profileCompleted: { type: Boolean, default: false },
 });
  
-const UserProfile = mongoose.model("UserProfile", UserProfileSchema);
+//const UserProfile = mongoose.model("UserProfile", UserProfileSchema);
+const UserProfile = mongoose.models.UserProfile || mongoose.model('UserProfile', UserProfileSchema);
+
 export default UserProfile;
