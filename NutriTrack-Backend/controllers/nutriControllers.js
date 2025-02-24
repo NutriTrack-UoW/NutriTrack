@@ -145,4 +145,3 @@ export const getMealsConsumed = async (req,res)=>{
 
     }
 }
-  

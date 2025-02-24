@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import {
   Button,
   Input,
@@ -19,6 +19,10 @@ import {
 import axios, {AxiosError} from "axios";
 import {ForgotPassword} from "../index.ts";
 import { logo, google } from "../../../Assets/index.ts";
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../contexts/UserContext';
+
+
 
 interface SignInDialogProps {
   open: boolean;
@@ -34,6 +38,8 @@ const SignInDialog = ({ open, onClose, openSignUp}: SignInDialogProps) => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+  const navigate = useNavigate();
+  const userContext = useContext(UserContext);
 
   // ✅ Input Validation Logic
   const validateInputs = () => {
@@ -73,15 +79,26 @@ const SignInDialog = ({ open, onClose, openSignUp}: SignInDialogProps) => {
         password: passwordRef.current?.value,
       });
   
-      const { token, user } = response.data;
+      const { token, userProfile } = response.data;
   
-      console.log("Login successful!", user);
+      console.log("Login successful!", userProfile);
       
       // ✅ Store token in localStorage
       localStorage.setItem("token", token);
-  
+
+      // ✅ Update loggedUser in context
+      if (userContext?.setLoggedUser) {
+        userContext.setLoggedUser(userProfile);
+      }
+
       // ✅ Close the modal
       onClose();
+
+      if (userProfile.profileCompleted) {
+        navigate('/dashboard');
+      } else {
+        navigate('/profile-setup');
+      }
     } catch (err) {
       // ✅ Ensure 'err' is treated as an AxiosError
       const error = err as AxiosError<{ message: string }>;

@@ -9,6 +9,8 @@ import SignUp from './SignUp';
 import CreateCustomFoodPage from './CreateCustomFoodPage';
 import MealsConsumedPage from './MealConsumedPage';
 import TrackPage from "./TrackPage";
+import ProfileSetup from "./ProfileSetup";
+import Dashboard from "./Dashboard";
 export {
     HomePage,
     HistoricalViewPage,
@@ -21,4 +23,6 @@ export {
     CreateCustomFoodPage,
     MealsConsumedPage,
     TrackPage,
+    ProfileSetup,
+    Dashboard,
 };

@@ -1,9 +1,40 @@
 import {Navbar, Footer, Hero, HomepageMidSection1} from "../Components/Sections";
 import { Box} from "@chakra-ui/react";
+import { useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 //import styles from "../../style";
 
 const HomePage = () => {
-	
+	// const navigate = useNavigate();
+	// const { loggedUser } = useContext(UserContext);
+  
+	// useEffect(() => {
+	//   const checkProfileStatus = async () => {
+	// 	if (loggedUser) {
+	// 	  if (loggedUser.profileCompleted) {
+	// 		navigate('/dashboard');
+	// 	  } else {
+	// 		navigate('/profile-setup');
+	// 	  }
+	// 	}
+	//   };
+	//   checkProfileStatus();
+	// }, [loggedUser, navigate]);
+
+	const navigate = useNavigate();
+	const userContext = useContext(UserContext);
+  
+	useEffect(() => {
+	  if (userContext?.loggedUser) {
+		if (userContext.loggedUser.profileCompleted) {
+		  navigate('/dashboard');
+		} else {
+		  navigate('/profile-setup');
+		}
+	  }
+	}, [userContext?.loggedUser, navigate]);
+  
 	return (
 		<Box className="w-full min-h-screen flex flex-col">
       
