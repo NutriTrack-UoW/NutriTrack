@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {  Button, Box, Container, Heading, Text, Spinner, VStack,SimpleGrid, HStack} from '@chakra-ui/react';
-import { Stat,StatLabel, StatNumber,StatHelpText} from "@chakra-ui/stat"
+import {  Box, Container, Heading, Text, Spinner, VStack,SimpleGrid} from '@chakra-ui/react';
+import { Stat,StatLabel, StatNumber,StatHelpText,} from "@chakra-ui/stat"
 interface FoodDetails {
   foodName: string;
   eatenWhen: string; // Added to categorize meals
@@ -15,7 +14,6 @@ interface FoodDetails {
 }
 
 const MealsConsumedPage = () => {
-  const navigate = useNavigate();
   const [meals, setMeals] = useState<FoodDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +22,7 @@ const MealsConsumedPage = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        const response = await fetch('/api/mealsConsumed', {
+        const response = await fetch('http://localhost:7001/mealsConsumed', {
           method: 'GET',
           headers: {
             "Content-Type": "application/json",
@@ -105,13 +103,9 @@ const MealsConsumedPage = () => {
 
   return (
     <Container maxW="container.lg" py={6}>
-     <HStack justifyContent="space-between" mb={6}>
-        <Heading as="h1" size="xl">Meals Consumed Today</Heading>
-        <HStack>
-          <Button colorScheme="blue" onClick={() => navigate('/track')}>Search Food</Button>
-          <Button colorScheme="green" onClick={() => navigate('/customFood')}>Add Your Own Meal</Button>
-        </HStack>
-      </HStack>
+      <Heading as="h1" size="xl" mb={6}>
+        Meals Consumed Today
+      </Heading>
 
       {/* Loop through the categories and render them */}
       {Object.keys(categorizedMeals).map((mealTime) => (
