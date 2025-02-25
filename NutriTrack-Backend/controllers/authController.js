@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import dotenv from "dotenv";
 import User from "../models/user.js";
-import UserProfile from "../models/UserProfile.js";
+import UserProfile from "../models/userProfile.js";
 import nodemailer from "nodemailer";
 
 dotenv.config();

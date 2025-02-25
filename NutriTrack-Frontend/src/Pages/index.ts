@@ -11,6 +11,8 @@ import MealsConsumedPage from './MealConsumedPage';
 import TrackPage from "./TrackPage";
 import TrackCustomFoodPage from "./TrackCustomFoodPage"
 import DailyDashboardPage from "./DailyDashboardPage";
+import ProfileSetup from "./ProfileSetup";
+import Dashboard from "./Dashboard";
 
 export {
     HomePage,
@@ -25,5 +27,7 @@ export {
     MealsConsumedPage,
     TrackPage,
     TrackCustomFoodPage,
-    DailyDashboardPage
+    DailyDashboardPage,
+    ProfileSetup,
+    Dashboard
 };

@@ -1,6 +1,6 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import {HomePage, HistoricalViewPage,Features, Pricing, FAQ, Testimonials, TrackPage, MealsConsumedPage, CreateCustomFoodPage, TrackCustomFoodPage} from "./Pages"
+import {HomePage, HistoricalViewPage,Features, Pricing, FAQ, Testimonials, TrackPage, MealsConsumedPage,DailyDashboardPage, CreateCustomFoodPage, TrackCustomFoodPage, Dashboard, ProfileSetup} from "./Pages"
 
 function App() {
 
@@ -20,6 +20,8 @@ function App() {
         <Route path='/mealsConsumed' element={< MealsConsumedPage/>} />
         <Route path='/customFood' element={<CreateCustomFoodPage />} />
         <Route path='/trackCustomFood' element={<TrackCustomFoodPage />} />
+        <Route path='/profile-setup' element={<ProfileSetup />} />
+        <Route path='/dashboard' element={<Dashboard />} />
 			</Routes>
 		</div>
     </>
