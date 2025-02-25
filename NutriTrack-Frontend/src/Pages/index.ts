@@ -24,6 +24,6 @@ export {
     CreateCustomFoodPage,
     MealsConsumedPage,
     TrackPage,
-    TrackCustomFoodPage
+    TrackCustomFoodPage,
     DailyDashboardPage
 };
