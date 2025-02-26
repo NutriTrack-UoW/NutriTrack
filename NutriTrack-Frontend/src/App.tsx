@@ -1,22 +1,27 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
-
-import HomePage from "./Pages/HomePage";
-import Navbar from "./Components/Sections/Navbar";
-import HistoricalViewPage from './Pages/HistoricalViewPage';
+import {HomePage, HistoricalViewPage,Features, Pricing, FAQ, Testimonials, TrackPage, MealsConsumedPage, CreateCustomFoodPage, TrackCustomFoodPage, DailyDashboardPage} from "./Pages"
 
 function App() {
 
   return (
     <>
-      <Box minH={"100vh"}>
-			<Navbar />
+      <div>
 			<Routes>
 				<Route path='/' element={<HomePage />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/features' element={<Features />} />
+        <Route path='/pricing' element={<Pricing />} />
+        <Route path='/faq' element={<FAQ />} />
+        <Route path='/testimonials' element={<Testimonials />} />
         <Route path='/historical' element={<HistoricalViewPage />} />
+        <Route path='/dailydashboard' element={<DailyDashboardPage />} />
+        <Route path='/track' element={< TrackPage/>} />
+        <Route path='/mealsConsumed' element={< MealsConsumedPage/>} />
+        <Route path='/customFood' element={<CreateCustomFoodPage />} />
+        <Route path='/trackCustomFood' element={<TrackCustomFoodPage />} />
 			</Routes>
-		</Box>
+		</div>
     </>
     
   )
