@@ -5,6 +5,10 @@ import { fetchMealsByName, fetchMealsByFilter, fetchRecipeDetails, fetchCategori
 
 jest.mock('../../Services/recipeAPI');
 
+jest.mock('../../utils/env', () => ({
+  BACKEND_URL: 'http://localhost:5000',
+}));
+
 const mockMeal = {
     idMeal: '12345',
     strMeal: 'Test Meal',
